@@ -3,7 +3,6 @@
 """
 import subprocess
 from typing import List
-import sys
 import os
 import os.path
 import argparse
