@@ -42,7 +42,7 @@ jobs:
           protolock
       - name: Check broken compatibility and update version
         run: |
-            ./protolock_check.sh
+            python3 version.py
             echo "RELEASE_TAG=$(cat VERSION)" >> $GITHUB_ENV
             git config user.name github-actions
             git config user.email github-actions@github.com

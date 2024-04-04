@@ -100,4 +100,15 @@ def main(args: List[str] = None):
             fp.write(new_version_number)
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    protolock_status = subprocess.run(['protolock', 'status', '--strict'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+    version_change = "patch"
+    if protolock_status != "":
+        version_change = "minor"
+        print("Backward compatibility is broken!!!")
+        print(protolock_status)
+    else:
+        version_change = "patch"
+        print("Backward compatibility not broken")
+    main(["--version-change=" + version_change])
+    subprocess.run(['protolock', 'commit', '--force'], stdout=subprocess.PIPE)
+
