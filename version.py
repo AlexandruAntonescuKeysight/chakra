@@ -1,7 +1,6 @@
 """Build utilities
 
 """
-import subprocess
 from typing import List
 import sys
 import os
