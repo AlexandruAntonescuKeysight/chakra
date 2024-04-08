@@ -48,6 +48,8 @@ jobs:
             echo "RELEASE_TAG=$(cat VERSION)" >> $GITHUB_ENV
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           author_name: GitHub Actions
           author_email: actions@github.com
