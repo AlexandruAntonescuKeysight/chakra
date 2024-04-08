@@ -10,6 +10,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+          token: ${{ secrets.MY_TOKEN }}
       - uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           packages: make gcc g++ libprotobuf-dev protobuf-compiler
@@ -46,7 +47,6 @@ jobs:
         run: |
             python3 version.py
             echo "RELEASE_TAG=$(cat VERSION)" >> $GITHUB_ENV
-            git remote set-url origin ssh://git@github.com:mlcommons/chakra.git
             git config user.name github-actions
             git config user.email github-actions@github.com
             git add VERSION
