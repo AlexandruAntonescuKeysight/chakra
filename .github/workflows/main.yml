@@ -1,6 +1,7 @@
 name: Build test
 on: [push, pull_request, workflow_dispatch]
-
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
