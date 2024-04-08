@@ -10,7 +10,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-          token: ${{ secrets.MY_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           packages: make gcc g++ libprotobuf-dev protobuf-compiler
