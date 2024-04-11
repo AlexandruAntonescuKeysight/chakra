@@ -90,18 +90,16 @@ def main(args: List[str] = None):
     elif args.version_change == "patch":
         patch += 1
     new_version_number = f"{major}.{minor}.{patch}"
-    print(
-        f"current version:{original_version_number} change:{args.version_change} next version:{new_version_number}"
-    )
+    print(f"current version:{original_version_number} change:{args.version_change} next version:{new_version_number}")
     if original_version_number != new_version_number:
         with open("VERSION", "w", encoding="ascii") as fp:
             fp.write(new_version_number)
 
 
 if __name__ == "__main__":
-    protolock_status = subprocess.run(
-        ["protolock", "status", "--strict"], stdout=subprocess.PIPE
-    ).stdout.decode("utf-8")
+    protolock_status = subprocess.run(["protolock", "status", "--strict"], stdout=subprocess.PIPE).stdout.decode(
+        "utf-8"
+    )
     version_change = "patch"
     if protolock_status != "":
         version_change = "minor"
