@@ -1,18 +1,13 @@
 name: Update version and publish release
-on: [push, workflow_dispatch]
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
+on: 
+    push:
+        branches:
+            - test2
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-python@v2
         with:
           python-version: 3.7
@@ -44,7 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ env.RELEASE_TAG }}
-          release_name: Release ${{ env.RELEASE_TAG }}
+          release_name: ${{ github.event.head_commit.message }}
           body: |
             Release ${{ env.RELEASE_TAG }}
           draft: false
