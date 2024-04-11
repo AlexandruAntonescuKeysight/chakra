@@ -1,5 +1,4 @@
-
-name: Build test
+name: Update version and publish release
 on: [push, workflow_dispatch]
 permissions:
   contents: write
