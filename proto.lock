@@ -520,7 +520,7 @@
               },
               {
                 "id": 11,
-                "name": "test_node",
+                "name": "test_node_changed",
                 "type": "uint32"
               }
             ]
