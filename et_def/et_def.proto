@@ -145,6 +145,8 @@ message Node {
   IOInfo inputs = 8;
   IOInfo outputs = 9;
   repeated AttributeProto attr = 10;
+
+  uint32 test_node_changed = 11;
 }
 
 message IOInfo {
