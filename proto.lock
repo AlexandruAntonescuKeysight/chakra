@@ -521,6 +521,11 @@
                 "name": "attr",
                 "type": "AttributeProto",
                 "is_repeated": true
+              },
+              {
+                "id": 11,
+                "name": "test_node_changed",
+                "type": "uint32"
               }
             ]
           },
