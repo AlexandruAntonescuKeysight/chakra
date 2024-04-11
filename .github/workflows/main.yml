@@ -4,6 +4,7 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  pages: write
 jobs:
   build:
     runs-on: ubuntu-latest
