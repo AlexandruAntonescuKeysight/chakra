@@ -1,6 +1,5 @@
-"""Build utilities
+"""Build utilities"""
 
-"""
 import subprocess
 from typing import List
 import os
@@ -80,7 +79,7 @@ def main(args: List[str] = None):
     minor = int(minor)
     patch = int(patch)
     original_version_number = f"{major}.{minor}.{patch}"
-    print(f'args.version_change: {args.version_change}')
+    print(f"args.version_change: {args.version_change}")
     if args.version_change == "major":
         major += 1
         minor = 0
@@ -98,8 +97,11 @@ def main(args: List[str] = None):
         with open("VERSION", "w", encoding="ascii") as fp:
             fp.write(new_version_number)
 
+
 if __name__ == "__main__":
-    protolock_status = subprocess.run(['protolock', 'status', '--strict'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+    protolock_status = subprocess.run(
+        ["protolock", "status", "--strict"], stdout=subprocess.PIPE
+    ).stdout.decode("utf-8")
     version_change = "patch"
     if protolock_status != "":
         version_change = "minor"
@@ -109,4 +111,4 @@ if __name__ == "__main__":
         version_change = "patch"
         print("Backward compatibility not broken")
     main(["--version-change=" + version_change])
-    subprocess.run(['protolock', 'commit', '--force'], stdout=subprocess.PIPE)
+    subprocess.run(["protolock", "commit", "--force"], stdout=subprocess.PIPE)
