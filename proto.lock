@@ -81,10 +81,6 @@
               {
                 "name": "BARRIER",
                 "integer": 9
-              },
-              {
-                "name": "BARRIErrrR",
-                "integer": 10
               }
             ]
           }
