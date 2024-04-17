@@ -13,7 +13,7 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "improve_et_feeder" ]
   pull_request:
     branches: [ "main" ]
   schedule:
@@ -45,7 +45,7 @@ jobs:
       matrix:
         include:
         - language: c-cpp
-          build-mode: autobuild
+          build-mode: manual
         - language: python
           build-mode: none
         # CodeQL supports the following values keywords for 'language': 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift'
