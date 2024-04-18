@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 # set paths
 SCRIPT_DIR=/home/tony/chakra_fork/chakra
 BUILD_DIR="${SCRIPT_DIR:?}"/build
