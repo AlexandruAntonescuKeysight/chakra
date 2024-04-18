@@ -2,7 +2,7 @@
 set -e
 
 # set paths
-SCRIPT_DIR=/home/tony/chakra_fork/chakra
+SCRIPT_DIR=.
 BUILD_DIR="${SCRIPT_DIR:?}"/build
 CHAKRA_ET_DIR="${SCRIPT_DIR:?}"/et_def
 
