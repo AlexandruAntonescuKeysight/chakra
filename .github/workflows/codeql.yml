@@ -81,7 +81,8 @@ jobs:
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
     - if: matrix.build-mode == 'manual'
       run: |
-        apt install protobuf-compiler libprotobuf-dev
+        sudo apt update
+        sudo apt install protobuf-compiler libprotobuf-dev
         ./build_feeder.sh
 
     - name: Perform CodeQL Analysis
