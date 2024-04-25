@@ -21,7 +21,7 @@ function compile_chakra_et() {
 #       --python_out="${CHAKRA_ET_DIR:?}"
 #   fi
 
-g++ -shared -fPIC -I "${SCRIPT_DIR:?}"  et_feeder/et_feeder.cpp et_feeder/et_feeder_node.cpp
+g++ -shared -fPIC -Wall  et_feeder/et_feeder.cpp et_feeder/et_feeder_node.cpp third_party/utils/protoio.cc et_def/et_def.pb.cc -o libfeeder.so -lprotobuf -I . 
 
 }
 
