@@ -4,7 +4,7 @@ CHAKRA_ET_DIR := $(SCRIPT_DIR)/et_def
 
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall
+CXXFLAGS = -Wall -g
 
 # Source files
 SRCS =  $(CHAKRA_ET_DIR)/et_def.pb.cc $(SCRIPT_DIR)/et_feeder/et_feeder.cpp $(SCRIPT_DIR)/et_feeder/et_feeder_node.cpp $(SCRIPT_DIR)/third_party/utils/protoio.cc $(SCRIPT_DIR)/et_feeder/tests.cpp
