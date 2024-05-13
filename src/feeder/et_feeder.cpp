@@ -26,6 +26,8 @@ void ETFeeder::addNode(shared_ptr<ETFeederNode> node) {
 
 void ETFeeder::removeNode(uint64_t node_id) {
   dep_graph_.erase(node_id);
+  dep_free_node_id_set_.erase(node_id);
+  removeNodeFromDepFreeNodeQueue(node_id);
 
   if (!et_complete_ && (dep_free_node_queue_.size() < window_size_)) {
     readNextWindow();
@@ -170,6 +172,28 @@ void ETFeeder::readNextWindow() {
       dep_free_node_id_set_.emplace(node_id);
       dep_free_node_queue_.emplace(node);
     }
+  }
+}
+
+void ETFeeder::removeNodeFromDepFreeNodeQueue(uint16_t node_id) {
+  std::priority_queue<
+      std::shared_ptr<ETFeederNode>,
+      std::vector<std::shared_ptr<ETFeederNode>>,
+      Chakra::CompareNodes>
+      dep_free_node_queue_copy{};
+
+  while (!dep_free_node_queue_.empty()) {
+    std::shared_ptr<ETFeederNode> node = dep_free_node_queue_.top();
+    dep_free_node_queue_.pop();
+    if (node->id() == node_id) {
+      break;
+    }
+    dep_free_node_queue_copy.push(node);
+  }
+
+  while (!dep_free_node_queue_copy.empty()) {
+    dep_free_node_queue_.push(dep_free_node_queue_copy.top());
+    dep_free_node_queue_copy.pop();
   }
 }
 
