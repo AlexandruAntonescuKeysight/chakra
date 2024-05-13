@@ -39,6 +39,7 @@ class ETFeeder {
   std::shared_ptr<ETFeederNode> readNode();
   void readNextWindow();
   void resolveDep();
+  void removeNodeFromDepFreeNodeQueue(uint16_t node_id);
 
   ProtoInputStream trace_;
   const uint32_t window_size_;
