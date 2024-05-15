@@ -64,21 +64,21 @@ TEST_F(ETFeederTest, ConstructorTestETFeeder) {
 }
 
 TEST_F(ETFeederTest, RemoveTest) {
-    SetUp("et_feeder/llama_chakra.4.et");
-    std::shared_ptr<Chakra::ETFeederNode> node;
-    // std::shared_ptr<Chakra::ETFeederNode> node = trace->lookupNode(5);
-    // std::cout << node->id() << " " << "\n";
+    SetUp("et_feeder/llama_chakra.3.et");
+    // std::shared_ptr<Chakra::ETFeederNode> node;
+    std::shared_ptr<Chakra::ETFeederNode> node = trace->lookupNode(17);
+    std::cout << node->is_cpu_op() << " " << "\n";
     // trace->removeNode(5);
     // std::cout << "aiciii " << "\n";
     // trace->removeNode(432);
     // node = trace->lookupNode(216);
-    node = trace->getNextIssuableNode();
-    std::cout << node->id() << " " << "\n";
+    // node = trace->getNextIssuableNode();
+    // std::cout << node->id() << " " << "\n";
     // std::cout << "aiciii " << "\n";
-    node = trace->getNextIssuableNode();
-    std::cout << node->id() << " " << "\n";
-    node = trace->getNextIssuableNode();
-    node = trace->getNextIssuableNode();
+    // node = trace->getNextIssuableNode();
+    // std::cout << node->id() << " " << "\n";
+    // node = trace->getNextIssuableNode();
+    // node = trace->getNextIssuableNode();
     // std::cout << "aiciii " << "\n";
     // node = trace->getNextIssuableNode();
     // trace->removeNode(node->id());
