@@ -68,11 +68,23 @@ TEST_F(ETFeederTest, RemoveTest) {
     std::shared_ptr<Chakra::ETFeederNode> node = trace->lookupNode(216);
     ASSERT_EQ(node->id(), 216);
     trace->removeNode(216);
-    node = trace->lookupNode(216);
+    freopen("/dev/null", "w", stderr);
+    try
+    {
+        node = trace->lookupNode(216);
+        ASSERT_TRUE(false) << "node should be removed \n";
+    }
+    catch(const std::exception& e)
+    {
+        // std::cerr << e.what() << '\n';
+        // ASSERT_EQ("looking for node_id=216 in dep graph, however, not loaded yet", e.what());
+    }
+    freopen("/dev/tty", "w", stderr);
+    
     // ASSERT_EQ(node->id(), 5);
 }
 
-TEST_F(ETFeederTest, RemoveTestAndGetNext) {
+TEST_F(ETFeederTest, RemoveAndGetNextTest) {
     SetUp("et_feeder/llama_chakra.3.et");
     std::shared_ptr<Chakra::ETFeederNode> node = trace->lookupNode(5);
     ASSERT_EQ(node->id(), 5);
@@ -81,7 +93,35 @@ TEST_F(ETFeederTest, RemoveTestAndGetNext) {
     ASSERT_EQ(node->id(), 5);
 }
 
-// Add more test cases as needed
+TEST_F(ETFeederTest, FreeChildrenTest) {
+    SetUp("et_feeder/chakra.0.et");
+    std::shared_ptr<Chakra::ETFeederNode> node = trace->lookupNode(216);
+    ASSERT_EQ(node->id(), 216);
+    trace->freeChildrenNodes(216);
+    node = trace->getNextIssuableNode();
+    ASSERT_EQ(node->id(), 216);
+    node = trace->getNextIssuableNode();
+    ASSERT_EQ(node->id(), 217);
+}
+
+TEST_F(ETFeederTest, HasNodesToIssueTest) {
+    SetUp("et_feeder/llama_chakra.3.et");
+    std::shared_ptr<Chakra::ETFeederNode> node = trace->getNextIssuableNode();
+    ASSERT_EQ(node->id(), 5);
+    ASSERT_TRUE(trace->hasNodesToIssue());
+    trace->removeNode(5);
+    ASSERT_TRUE(trace->hasNodesToIssue());
+}
+
+TEST_F(ETFeederTest, PushBackIssuableNodeTest) {
+    SetUp("et_feeder/chakra.0.et");
+    std::shared_ptr<Chakra::ETFeederNode> node;
+    trace->pushBackIssuableNode(217);
+    node = trace->getNextIssuableNode();
+    ASSERT_EQ(node->id(), 216);
+    node = trace->getNextIssuableNode();
+    ASSERT_EQ(node->id(), 217);
+}
 
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
