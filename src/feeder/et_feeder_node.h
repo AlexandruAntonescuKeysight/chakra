@@ -4,7 +4,7 @@
 #include <unordered_set>
 #include <vector>
 
-#include "et_def/et_def.pb.h"
+#include "et_def.pb.h"
 
 namespace Chakra {
 
@@ -53,7 +53,7 @@ class ETFeederNode {
 
   uint64_t id_;
   std::string name_;
-  bool is_cpu_op_;
+  uint32_t is_cpu_op_;
   uint64_t runtime_;
   uint64_t num_ops_;
   uint32_t tensor_loc_;

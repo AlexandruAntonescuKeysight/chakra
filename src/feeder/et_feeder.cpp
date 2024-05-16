@@ -1,4 +1,4 @@
-#include "et_feeder/et_feeder.h"
+#include "et_feeder.h"
 
 using namespace std;
 using namespace Chakra;
@@ -26,8 +26,8 @@ void ETFeeder::addNode(shared_ptr<ETFeederNode> node) {
 
 void ETFeeder::removeNode(uint64_t node_id) {
   dep_graph_.erase(node_id);
-  dep_free_node_id_set_.erase(node_id);
-  removeNodeFromDepFreeNodeQueue(node_id);
+  // dep_free_node_id_set_.erase(node_id);
+  // removeNodeFromDepFreeNodeQueue(node_id);
 
   if (!et_complete_ && (dep_free_node_queue_.size() < window_size_)) {
     readNextWindow();

@@ -1,16 +1,16 @@
 SCRIPT_DIR := .
 BUILD_DIR := $(SCRIPT_DIR)/build
-CHAKRA_ET_DIR := $(SCRIPT_DIR)/et_def
+CHAKRA_ET_DIR := $(SCRIPT_DIR)/schema/protobuf
 
 # Compiler and flags
 CXX = g++
 CXXFLAGS = -Wall -g
 
 # Source files
-SRCS =  $(CHAKRA_ET_DIR)/et_def.pb.cc $(SCRIPT_DIR)/et_feeder/et_feeder.cpp $(SCRIPT_DIR)/et_feeder/et_feeder_node.cpp $(SCRIPT_DIR)/third_party/utils/protoio.cc $(SCRIPT_DIR)/et_feeder/tests.cpp
+SRCS =  $(CHAKRA_ET_DIR)/et_def.pb.cc $(SCRIPT_DIR)/src/feeder/et_feeder.cpp $(SCRIPT_DIR)/src/feeder/et_feeder_node.cpp $(SCRIPT_DIR)/src/third_party/utils/protoio.cc $(SCRIPT_DIR)/et_feeder/tests.cpp
 
 # Object files
-OBJS = $(CHAKRA_ET_DIR)/et_def.pb.o $(SCRIPT_DIR)/et_feeder/et_feeder.o $(SCRIPT_DIR)/et_feeder/et_feeder_node.o $(SCRIPT_DIR)/third_party/utils/protoio.o $(SCRIPT_DIR)/et_feeder/tests.o
+OBJS = $(CHAKRA_ET_DIR)/et_def.pb.o $(SCRIPT_DIR)/src/feeder/et_feeder.o $(SCRIPT_DIR)/src/feeder/et_feeder_node.o $(SCRIPT_DIR)/src/third_party/utils/protoio.o $(SCRIPT_DIR)/et_feeder/tests.o
 
 # Executable name
 TARGET := $(BUILD_DIR)/test
@@ -19,7 +19,7 @@ TARGET := $(BUILD_DIR)/test
 LIBS := -lgtest -lgtest_main -lprotobuf -lpthread 
 
 # Include directories
-INCLUDES := -I.
+INCLUDES := -I src/third_party/utils -I schema/protobuf -I src/feeder
 
 # Default target
 all: compile_proto build tests
