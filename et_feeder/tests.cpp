@@ -80,8 +80,6 @@ TEST_F(ETFeederTest, RemoveTest) {
         // ASSERT_EQ("looking for node_id=216 in dep graph, however, not loaded yet", e.what());
     }
     freopen("/dev/tty", "w", stderr);
-    
-    // ASSERT_EQ(node->id(), 5);
 }
 
 TEST_F(ETFeederTest, RemoveAndGetNextTest) {
@@ -121,6 +119,17 @@ TEST_F(ETFeederTest, PushBackIssuableNodeTest) {
     ASSERT_EQ(node->id(), 216);
     node = trace->getNextIssuableNode();
     ASSERT_EQ(node->id(), 217);
+}
+
+TEST_F(ETFeederTest, AddNodeTest) {
+    SetUp("et_feeder/chakra.0.et");
+    std::shared_ptr<Chakra::ETFeederNode> node;
+    node = trace->lookupNode(216);
+    trace->removeNode(216);
+    trace->addNode(node);
+    std::shared_ptr<Chakra::ETFeederNode> node2;
+    node2 = trace->lookupNode(216);
+    ASSERT_EQ(node2->id(), 216);
 }
 
 int main(int argc, char** argv) {
