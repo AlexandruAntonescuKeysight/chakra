@@ -132,6 +132,15 @@ TEST_F(ETFeederTest, AddNodeTest) {
     ASSERT_EQ(node2->id(), 216);
 }
 
+TEST_F(ETFeederTest, NodeGetChildrenTest) {
+    SetUp("et_feeder/chakra.0.et");
+    std::shared_ptr<Chakra::ETFeederNode> node;
+    node = trace->lookupNode(216);
+    std::vector<std::shared_ptr<Chakra::ETFeederNode>> children = node->getChildren();
+    ASSERT_EQ(children[0]->id(), 217);
+    ASSERT_EQ(children[2]->id(), 435);
+}
+
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
