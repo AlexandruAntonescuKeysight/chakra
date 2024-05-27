@@ -13,7 +13,7 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "main", "improve_et_feeder" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
   # schedule:
