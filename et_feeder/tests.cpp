@@ -5,10 +5,9 @@
 
 class ETFeederTest : public ::testing::Test {
 protected:
-    ETFeederTest() {}  // Default constructor
+    ETFeederTest() {}
     virtual ~ETFeederTest() {}
 
-    // Overloaded SetUp function
     void SetUp(const std::string& filename) {
         trace = new Chakra::ETFeeder(filename);
     }
@@ -20,8 +19,7 @@ protected:
     Chakra::ETFeeder* trace;
 };
 
-// Constructor test case
-TEST_F(ETFeederTest, ConstructorTestID) {
+TEST_F(ETFeederTest, ConstructorNodeIDTest) {
     SetUp("et_feeder/chakra.0.et");
     std::shared_ptr<Chakra::ETFeederNode> node = trace->getNextIssuableNode();
     uint64_t firstNodeID = node->id(); 
@@ -32,8 +30,7 @@ TEST_F(ETFeederTest, ConstructorTestID) {
     ASSERT_EQ(secondNodeID, 432);
 }
 
-// Constructor test case
-TEST_F(ETFeederTest, ConstructorTestValues) {
+TEST_F(ETFeederTest, ConstructorNodeValuesTest) {
     SetUp("et_feeder/chakra.0.et");
     std::shared_ptr<Chakra::ETFeederNode> node = trace->getNextIssuableNode();
     ChakraProtoMsg::NodeType firstNodeType = node->type(); 
@@ -43,7 +40,6 @@ TEST_F(ETFeederTest, ConstructorTestValues) {
     std::string attr = "rf_id";
     ChakraProtoMsg::AttributeProto rf_id = node->get_other_attr(attr);
     ASSERT_EQ(rf_id.int64_val(), 2);
-    // std::cout << node->getChakraNode()->Utf8DebugString();
     
     node = trace->getNextIssuableNode();
     uint64_t secondNodeType = node->type(); 
@@ -54,7 +50,7 @@ TEST_F(ETFeederTest, ConstructorTestValues) {
     ASSERT_EQ(rf_id.int64_val(), 110);
 }
 
-TEST_F(ETFeederTest, ConstructorTestETFeeder) {
+TEST_F(ETFeederTest, ConstructorETFeederTest) {
     SetUp("et_feeder/chakra.0.et");
     std::shared_ptr<Chakra::ETFeederNode> node = trace->getNextIssuableNode();
     std::vector<std::shared_ptr<Chakra::ETFeederNode>> children = node->getChildren(); 
@@ -76,8 +72,7 @@ TEST_F(ETFeederTest, RemoveTest) {
     }
     catch(const std::exception& e)
     {
-        // std::cerr << e.what() << '\n';
-        // ASSERT_EQ("looking for node_id=216 in dep graph, however, not loaded yet", e.what());
+        //this is the desired behaviour
     }
     freopen("/dev/tty", "w", stderr);
 }
