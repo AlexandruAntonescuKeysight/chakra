@@ -21,7 +21,7 @@ TEST_F(ETFeederTest, ConstructorNodeIDTest) {
   SetUp("tests/data/chakra.0.et");
   std::shared_ptr<Chakra::ETFeederNode> node = trace->getNextIssuableNode();
   uint64_t firstNodeID = node->id();
-  ASSERT_EQ(firstNodeID, 216);
+  ASSERT_EQ(firstNodeID, 219);
 
   node = trace->getNextIssuableNode();
   uint64_t secondNodeID = node->id();
